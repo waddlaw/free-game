@@ -1,7 +1,7 @@
 free-game
 =========
 
-[![Build Status](https://secure.travis-ci.org/fumieval/free-game.png?branch=master)](http://travis-ci.org/fumieval/free-game)
+[![Build Status](https://travis-ci.org/waddlaw/free-game.svg?branch=master)](https://travis-ci.org/waddlaw/free-game)
 
 free-game gives you a world so that you can create games easily.
 
