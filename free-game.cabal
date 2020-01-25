@@ -1,23 +1,23 @@
-name:                free-game
-version:             1.1.90
-synopsis:            Create games for free
+cabal-version:      2.4
+name:               free-game
+version:            1.1.90
+synopsis:           Create games for free
 description:
-    free-game defines a monad that integrates features to create 2D games.
-    .
-    Twitter: #hs_free_game
+  free-game defines a monad that integrates features to create 2D games.
+  .
+  Twitter: #hs_free_game
 
-homepage:            https://github.com/fumieval/free-game
-bug-reports:         https://github.com/fumieval/free-game/issues
-license:             BSD3
-license-file:        LICENSE
-author:              Fumiaki Kinoshita
-maintainer:          Fumiaki Kinoshita <fumiexcel@gmail.com>
-copyright:           Copyright (C) 2012-2013 Fumiaki Kinoshita
-category:            Graphics, Monads
-build-type:          Simple
-stability:           experimental
-cabal-version:       >=1.10
-
+homepage:           https://github.com/fumieval/free-game
+bug-reports:        https://github.com/fumieval/free-game/issues
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             Fumiaki Kinoshita
+maintainer:         Fumiaki Kinoshita <fumiexcel@gmail.com>
+copyright:          Copyright (C) 2012-2013 Fumiaki Kinoshita
+category:           Graphics, Monads
+build-type:         Simple
+stability:          experimental
+tested-with:        GHC ==8.6.5
 extra-source-files:
   CHANGELOG.md
   examples/*.hs
@@ -25,52 +25,55 @@ extra-source-files:
   examples/*.ttf
 
 source-repository head
-  type: git
+  type:     git
   location: https://github.com/fumieval/free-game.git
 
 library
   default-language:   Haskell2010
-
   exposed-modules:
     FreeGame
+    FreeGame.Backend.GLFW
     FreeGame.Class
     FreeGame.Data.Bitmap
     FreeGame.Data.Font
-    FreeGame.Text
-    FreeGame.UI
     FreeGame.Instances
-    FreeGame.Backend.GLFW
     FreeGame.Internal.Finalizer
     FreeGame.Internal.GLFW
+    FreeGame.Text
     FreeGame.Types
+    FreeGame.UI
     FreeGame.Util
 
-  ghc-options: -Wall -fexcess-precision -O2
-  default-extensions: FlexibleContexts, FlexibleInstances, CPP
+  ghc-options:        -Wall -fexcess-precision -O2
+  default-extensions:
+    CPP
+    FlexibleContexts
+    FlexibleInstances
+
   build-depends:
-    array >= 0.4,
-    base == 4.*,
-    colors == 0.3.*,
-    containers >= 0.4,
-    control-bool,
-    directory >= 1.0,
-    filepath >= 1.3,
-    free >= 4.6.1 && < 5,
-    freetype2 >= 0.1,
-    GLFW-b >= 1.3 && <2,
-    hashable >= 1.2,
-    JuicyPixels,
-    JuicyPixels-util >=0.1.1 && < 0.3,
-    linear >= 1.0 && < 2,
-    mtl >= 2.2 && <4,
-    OpenGL >= 3 && <4,
-    OpenGLRaw,
-    random == 1.*,
-    reflection,
-    StateVar,
-    template-haskell,
-    transformers >= 0.3,
-    vector >= 0.9 && <0.12,
-    void >= 0.5,
-    boundingboxes >= 0.2 && < 0.4,
-    lens >= 3.8 && < 5
+    , array             ^>=0.5
+    , base              ^>=4.12
+    , boundingboxes     ^>=0.2.3
+    , colors            ^>=0.3
+    , containers        ^>=0.6.0
+    , control-bool      ^>=0.2.1
+    , directory         ^>=1.3.3
+    , filepath          ^>=1.4.2
+    , free              ^>=5.1
+    , freetype2         ^>=0.1.2
+    , GLFW-b            ^>=3.2.1
+    , hashable          ^>=1.2.7
+    , JuicyPixels       ^>=3.3.4
+    , JuicyPixels-util  ^>=0.2
+    , lens              ^>=4.17
+    , linear            ^>=1.20.9
+    , mtl               ^>=2.2
+    , OpenGL            ^>=3.0
+    , OpenGLRaw         ^>=3.3.4
+    , random            ^>=1.1
+    , reflection        ^>=2.1.5
+    , StateVar          ^>=1.2
+    , template-haskell  ^>=2.14
+    , transformers      ^>=0.5.6
+    , vector            ^>=0.12
+    , void              ^>=0.7.3
