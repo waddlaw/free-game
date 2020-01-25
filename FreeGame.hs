@@ -1,5 +1,9 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
+
 -----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+
 -- |
 -- Module      :  FreeGame
 -- Copyright   :  (C) 2013 Fumiaki Kinoshita
@@ -8,36 +12,38 @@
 -- Maintainer  :  Fumiaki Kinoshita <fumiexcel@gmail.com>
 -- Stability   :  provisional
 -- Portability :  non-portable
-----------------------------------------------------------------------------
 module FreeGame
   ( -- * Game
     Game,
     runGame,
     runGameDefault,
     reGame,
-    WindowMode(..),
+    WindowMode (..),
     BoundingBox2,
-    Box(..),
+    Box (..),
     isInside,
     delay,
     tick,
     foreverFrame,
     untick,
     untickInfinite,
+
     -- * Frame
     Frame,
     reFrame,
-    FreeGame(..),
+    FreeGame (..),
+
     -- * Transformations
     Vec2,
-    Affine(..),
-    Local(),
+    Affine (..),
+    Local (),
     globalize,
     localize,
+
     -- * Pictures
     Drawable,
-    Picture2D(..),
-    BlendMode(..),
+    Picture2D (..),
+    BlendMode (..),
     Bitmap,
     bitmapSize,
     readBitmap,
@@ -46,19 +52,22 @@ module FreeGame
     loadBitmaps,
     loadBitmapsWith,
     writeBitmap,
+
     -- * Text
     Font,
     loadFont,
     text,
+
     -- * Keyboard
-    Keyboard(..),
-    Key(..),
+    Keyboard (..),
+    Key (..),
     charToKey,
     keyPress,
     keyUp,
     keyDown,
+
     -- * Mouse
-    Mouse(),
+    Mouse (),
     mouseScroll,
     mouseInWindow,
     mousePositionMay,
@@ -72,16 +81,19 @@ module FreeGame
     mouseUpL,
     mouseUpR,
     mouseUpM,
+
     -- * IO
-    FromFinalizer(),
+    FromFinalizer (),
     embedIO,
     liftIO,
     randomness,
+
     -- * Utility functions
     unitV2,
     angleV2,
     degrees,
     radians,
+
     -- * Reexports
     module Control.Monad,
     module Control.Applicative,
@@ -89,30 +101,31 @@ module FreeGame
     module Data.Color,
     module Data.Color.Names,
     module Linear,
+
     -- * Deprecated
     keyChar,
-    keySpecial
+    keySpecial,
+  )
+where
 
-) where
-
-import FreeGame.UI
-import FreeGame.Util
-import FreeGame.Types
-import FreeGame.Text
-import FreeGame.Class
-import FreeGame.Instances ()
-import FreeGame.Data.Bitmap
-import FreeGame.Data.Font
-import qualified FreeGame.Backend.GLFW as GLFW
-import Control.Monad.IO.Class
-import Control.Monad
 import Control.Applicative
 import Control.Bool
+import Control.Monad
+import Control.Monad.IO.Class
+import Control.Monad.Trans.Iter
+import Data.BoundingBox
 import Data.Color
 import Data.Color.Names
+import qualified FreeGame.Backend.GLFW as GLFW
+import FreeGame.Class
+import FreeGame.Data.Bitmap
+import FreeGame.Data.Font
+import FreeGame.Instances ()
+import FreeGame.Text
+import FreeGame.Types
+import FreeGame.UI
+import FreeGame.Util
 import Linear
-import Data.BoundingBox
-import Control.Monad.Trans.Iter
 
 -- | 'Game' is a kind of procedure but you can also use it like a value.
 -- free-game's design is based on free structures, however, you don't have to mind it -- Just apply 'runGame', and enjoy.
@@ -120,7 +133,6 @@ import Control.Monad.Trans.Iter
 -- <<http://shared.botis.org/free-game.png>>
 --
 -- For more examples, see <https://github.com/fumieval/free-game/tree/master/examples>.
-
 runGame :: WindowMode -> BoundingBox2 -> Game a -> IO (Maybe a)
 runGame = GLFW.runGame
 
@@ -128,4 +140,4 @@ runGameDefault :: Game a -> IO (Maybe a)
 runGameDefault = runGame Windowed (Box (V2 0 0) (V2 640 480))
 
 instance MonadIO Frame where
-    liftIO = embedIO
+  liftIO = embedIO
