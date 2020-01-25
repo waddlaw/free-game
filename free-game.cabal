@@ -17,7 +17,7 @@ copyright:          Copyright (C) 2012-2013 Fumiaki Kinoshita
 category:           Graphics, Monads
 build-type:         Simple
 stability:          experimental
-tested-with:        GHC ==8.6.5
+tested-with:        GHC ==8.4.4 || ==8.6.5 || ==8.8.1
 extra-source-files:
   CHANGELOG.md
   examples/*.hs
@@ -52,20 +52,20 @@ library
 
   build-depends:
     , array             ^>=0.5
-    , base              ^>=4.12
+    , base              >=4.11   && <4.14
     , boundingboxes     ^>=0.2.3
     , colors            ^>=0.3
-    , containers        ^>=0.6.0
+    , containers        >=0.5.11 && <0.6.3
     , control-bool      ^>=0.2.1
-    , directory         ^>=1.3.3
+    , directory         ^>=1.3
     , filepath          ^>=1.4.2
     , free              ^>=5.1
     , freetype2         ^>=0.1.2
     , GLFW-b            ^>=3.2.1
-    , hashable          ^>=1.2.7
+    , hashable          >=1.2.7  && <1.4
     , JuicyPixels       ^>=3.3.4
     , JuicyPixels-util  ^>=0.2
-    , lens              ^>=4.17
+    , lens              >=4.17   && <4.19
     , linear            ^>=1.20.9
     , mtl               ^>=2.2
     , OpenGL            ^>=3.0
@@ -73,7 +73,7 @@ library
     , random            ^>=1.1
     , reflection        ^>=2.1.5
     , StateVar          ^>=1.2
-    , template-haskell  ^>=2.14
-    , transformers      ^>=0.5.6
+    , template-haskell  >=2.13   && <2.16
+    , transformers      ^>=0.5.5
     , vector            ^>=0.12
     , void              ^>=0.7.3
