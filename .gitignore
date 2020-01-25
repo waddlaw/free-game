@@ -9,3 +9,6 @@ Desktop.ini
 .cabal-sandbox
 cabal.sandbox.config
 examples/*.exe
+.stack-work
+dist-*
+stack.yaml.lock
