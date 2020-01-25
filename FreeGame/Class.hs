@@ -13,9 +13,6 @@
 module FreeGame.Class where
 
 import Linear
-#if !MIN_VERSION_base(4,8,0)
-import Control.Applicative
-#endif
 import Unsafe.Coerce
 import FreeGame.Types
 import FreeGame.Data.Bitmap
@@ -86,7 +83,7 @@ rot2 t (V2 x y) = V2 (p * x + q * y) (-q * x + p * y) where
     !p = cos t
     !q = sin t
 
-data ButtonState = Down | Press | Up | Release　| ChatterDown | ChatterUp
+data ButtonState = Down | Press | Up | Release | ChatterDown | ChatterUp
 
 buttonDown :: ButtonState -> ButtonState
 buttonDown Release = Down
@@ -200,7 +197,7 @@ class FromFinalizer m where
 instance FromFinalizer (FinalizerT IO) where
     fromFinalizer = id
 
--- | 'liftIO'　variety for 'FromFinalizer'.
+-- | 'liftIO' variety for 'FromFinalizer'.
 embedIO :: FromFinalizer m => IO a -> m a
 embedIO m = fromFinalizer (liftIO m)
 {-# INLINE embedIO #-}

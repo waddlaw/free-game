@@ -26,11 +26,7 @@ import FreeGame.Internal.Finalizer
 import FreeGame.UI
 import FreeGame.Types
 import Linear
-#if (MIN_VERSION_containers(0,5,0))
 import qualified Data.IntMap.Strict as IM
-#else
-import qualified Data.IntMap as IM
-#endif
 import qualified Data.Map.Strict as Map
 import qualified FreeGame.Internal.GLFW as G
 import qualified Graphics.UI.GLFW as GLFW

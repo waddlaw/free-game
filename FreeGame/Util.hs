@@ -1,4 +1,4 @@
-{-# LANGUAGE TemplateHaskell, CPP #-}
+{-# LANGUAGE TemplateHaskell #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  FreeGame.Util
@@ -35,9 +35,6 @@ module FreeGame.Util (
     keySpecial
     ) where
 
-#if !MIN_VERSION_base(4,8,0)
-import Control.Applicative
-#endif
 import Control.Monad
 import Control.Monad.Free.Class
 import Control.Monad.Trans.Iter
@@ -127,9 +124,6 @@ loadBitmapsWith getFullPath path = do
 
 -- | Load and define all pictures in the specified directory.
 -- On base >= 4.6, file paths to actually load will be respect to the directory of the executable. Otherwise it will be based on the current directory.
-
-#if (MIN_VERSION_base(4,6,0))
-
 loadBitmaps :: FilePath -> Q [Dec]
 loadBitmaps path = do
     v <- newName "v"
@@ -139,13 +133,6 @@ loadBitmaps path = do
                     (varE '(.))
                     (varE 'takeDirectory)
                 , varE 'getExecutablePath]) path
-
-#else
-
-loadBitmaps :: FilePath -> Q [Dec]
-loadBitmaps path = loadBitmapsWith (varE 'return) path
-
-#endif
 
 getFileList :: FilePath -> IO [FilePath]
 getFileList path = do

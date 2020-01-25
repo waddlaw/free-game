@@ -21,9 +21,6 @@ module FreeGame.Data.Font
   , RenderedChar(..)
   ) where
 
-#if !MIN_VERSION_base(4,8,0)
-import Control.Applicative
-#endif
 import Control.Monad.IO.Class
 import Control.Monad
 import Data.IORef
@@ -97,7 +94,7 @@ freeType = unsafePerformIO $ alloca $ \p -> do
 data RenderedChar = RenderedChar
     { charBitmap :: Bitmap
     , charOffset :: V2 Double
-    ,　charAdvance :: Double
+    , charAdvance :: Double
     }
 
 -- | The resolution used to render fonts.

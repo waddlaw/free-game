@@ -8,11 +8,7 @@ import Control.Monad.Trans.Iter
 import Control.Monad.Trans.Reader
 import Control.Monad.Trans.Cont
 import Control.Monad.Trans.Maybe
-#if MIN_VERSION_transformers(0,4,0)
 import Control.Monad.Trans.Except
-#else
-import Control.Monad.Trans.Error
-#endif
 import Control.Monad.Trans.Identity
 import qualified Control.Monad.State.Lazy as Lazy
 import qualified Control.Monad.State.Strict as Strict
@@ -20,9 +16,6 @@ import qualified Control.Monad.Writer.Lazy as Lazy
 import qualified Control.Monad.Writer.Strict as Strict
 import qualified Control.Monad.Trans.RWS.Strict as Strict
 import qualified Control.Monad.Trans.RWS.Lazy as Lazy
-#if !MIN_VERSION_base(4,8,0)
-import Data.Monoid
-#endif
 import Control.Monad.Free.Church as Church
 import Control.Monad.Free as Free
 import FreeGame.Class
@@ -102,11 +95,7 @@ MK_AFFINE(, Lazy.RWST r w s m, Lazy.mapRWST)
 MK_AFFINE(, Strict.RWST r w s m, Strict.mapRWST)
 MK_AFFINE(, IdentityT m, mapIdentityT)
 MK_AFFINE(, MaybeT m, mapMaybeT)
-#if MIN_VERSION_transformers(0,4,0)
 MK_AFFINE(, ExceptT e m, mapExceptT)
-#else
-MK_AFFINE(_COMMA_ Error e, ErrorT e m, mapErrorT)
-#endif
 MK_AFFINE(, ContT r m, mapContT)
 
 MK_PICTURE_2D(_COMMA_ Functor m, F m, Church.liftF, hoistF)
@@ -121,11 +110,7 @@ MK_PICTURE_2D(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift, Lazy.ma
 MK_PICTURE_2D(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift, Strict.mapRWST)
 MK_PICTURE_2D(_COMMA_ Monad m, IdentityT m, lift, mapIdentityT)
 MK_PICTURE_2D(_COMMA_ Monad m, MaybeT m, lift, mapMaybeT)
-#if MIN_VERSION_transformers(0,4,0)
 MK_PICTURE_2D(_COMMA_ Monad m, ExceptT e m, lift, mapExceptT)
-#else
-MK_PICTURE_2D(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift, mapErrorT)
-#endif
 MK_PICTURE_2D(_COMMA_ Monad m, ContT r m, lift, mapContT)
 
 MK_LOCAL(_COMMA_ Functor m, F m, Church.liftF)
@@ -140,11 +125,7 @@ MK_LOCAL(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift)
 MK_LOCAL(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift)
 MK_LOCAL(_COMMA_ Monad m, IdentityT m, lift)
 MK_LOCAL(_COMMA_ Monad m, MaybeT m, lift)
-#if MIN_VERSION_transformers(0,4,0)
 MK_LOCAL(_COMMA_ Monad m, ExceptT e m, lift)
-#else
-MK_LOCAL(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift)
-#endif
 MK_LOCAL(_COMMA_ Monad m, ContT r m, lift)
 
 MK_KEYBOARD(_COMMA_ Functor m, F m, Church.liftF)
@@ -159,11 +140,7 @@ MK_KEYBOARD(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift)
 MK_KEYBOARD(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift)
 MK_KEYBOARD(_COMMA_ Monad m, IdentityT m, lift)
 MK_KEYBOARD(_COMMA_ Monad m, MaybeT m, lift)
-#if MIN_VERSION_transformers(0,4,0)
 MK_KEYBOARD(_COMMA_ Monad m, ExceptT e m, lift)
-#else
-MK_KEYBOARD(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift)
-#endif
 MK_KEYBOARD(_COMMA_ Monad m, ContT r m, lift)
 
 MK_MOUSE(_COMMA_ Functor m, F m, liftF)
@@ -178,11 +155,7 @@ MK_MOUSE(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift)
 MK_MOUSE(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift)
 MK_MOUSE(_COMMA_ Monad m, IdentityT m, lift)
 MK_MOUSE(_COMMA_ Monad m, MaybeT m, lift)
-#if MIN_VERSION_transformers(0,4,0)
 MK_MOUSE(_COMMA_ Monad m, ExceptT e m, lift)
-#else
-MK_MOUSE(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift)
-#endif
 MK_MOUSE(_COMMA_ Monad m, ContT r m, lift)
 
 MK_FROM_FINALIZER(_COMMA_ Functor m, F m, liftF)
@@ -196,11 +169,7 @@ MK_FROM_FINALIZER(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift)
 MK_FROM_FINALIZER(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift)
 MK_FROM_FINALIZER(_COMMA_ Monad m, IdentityT m, lift)
 MK_FROM_FINALIZER(_COMMA_ Monad m, MaybeT m, lift)
-#if MIN_VERSION_transformers(0,4,0)
 MK_FROM_FINALIZER(_COMMA_ Monad m, ExceptT e m, lift)
-#else
-MK_FROM_FINALIZER(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift)
-#endif
 MK_FROM_FINALIZER(_COMMA_ Monad m, ContT r m, lift)
 
 MK_FREE_GAME(_COMMA_ Functor m, F m, liftF)
@@ -214,9 +183,5 @@ MK_FREE_GAME(_COMMA_ Monad m _COMMA_ Monoid w, Lazy.RWST r w s m, lift)
 MK_FREE_GAME(_COMMA_ Monad m _COMMA_ Monoid w, Strict.RWST r w s m, lift)
 MK_FREE_GAME(_COMMA_ Monad m, IdentityT m, lift)
 MK_FREE_GAME(_COMMA_ Monad m, MaybeT m, lift)
-#if MIN_VERSION_transformers(0,4,0)
 MK_FREE_GAME(_COMMA_ Monad m, ExceptT e m, lift)
-#else
-MK_FREE_GAME(_COMMA_ Monad m _COMMA_ Error e, ErrorT e m, lift)
-#endif
 MK_FREE_GAME(_COMMA_ Monad m, ContT r m, lift)
